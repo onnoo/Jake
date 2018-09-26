@@ -60,6 +60,11 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.menu);
     }
 
+    public void GameExit()
+    {
+        Application.Quit();
+    }
+
     void SetGameState(GameState newGameState)
     {
         if (newGameState == GameState.menu)

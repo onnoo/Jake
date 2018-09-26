@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
-    bool isCollected = false;
-
     void Show()
     {
         this.GetComponent<SpriteRenderer>().enabled = true;
         this.GetComponent<CircleCollider2D>().enabled = true;
-        isCollected = false;
     }
 
     void Hide()
@@ -21,7 +18,6 @@ public class Collectable : MonoBehaviour
 
     void Collect()
     {
-        isCollected = true;
         Hide();
         GameManager.instance.CollectedCoin();
         PlayerController.instance.CollectCoin();
