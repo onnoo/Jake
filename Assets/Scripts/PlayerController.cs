@@ -46,6 +46,10 @@ public class PlayerController : MonoBehaviour
                 rigidBody.velocity = new Vector2(runningSpeed, rigidBody.velocity.y);
             }
         }
+        else
+        {
+            rigidBody.Sleep();
+        }
     }
 
     void Jump()
