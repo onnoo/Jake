@@ -18,9 +18,12 @@ public class GameManager : MonoBehaviour
     public Canvas inGameCanvas;
     public Canvas gameOverCanvas;
 
+    public int collectedCoins;
+
     void Awake()
     {
         instance = this;
+        collectedCoins = PlayerPrefs.GetInt("coins", 0);
     }
 
     void Start()
@@ -48,6 +51,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         SetGameState(GameState.gameOver);
+        ViewGameOver.instance.RefreshResult();
     }
 
     //called when player decide to go back to the menu
@@ -81,5 +85,10 @@ public class GameManager : MonoBehaviour
         }
 
         currentGameState = newGameState;
+    }
+
+    public void CollectedCoin()
+    {
+        collectedCoins++;
     }
 }

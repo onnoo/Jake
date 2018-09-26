@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public float runningSpeed = 1.5f;
     private Vector3 startingPosition;
+    public int collectedCoins = 0;
 
     void Awake()
     {
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("isAlive", true);
         transform.position = startingPosition;
+        collectedCoins = 0;
     }
 
     // Update is called once per frame
@@ -75,5 +77,24 @@ public class PlayerController : MonoBehaviour
     {
         GameManager.instance.GameOver();
         animator.SetBool("isAlive", false);
+
+        //check if highscore save if it is
+        if (PlayerPrefs.GetFloat("highscore", 0) < this.GetDistance())
+        {
+            //save new highscore
+            PlayerPrefs.SetFloat("highscore", this.GetDistance());
+        }
+    }
+
+    public float GetDistance()
+    {
+        float traveldDistance = Vector2.Distance(new Vector2(startingPosition.x, 0),
+                                                 new Vector2(this.transform.position.x, 0));
+        return traveldDistance;
+    }
+
+    public void CollectCoin()
+    {
+        collectedCoins++;
     }
 }
